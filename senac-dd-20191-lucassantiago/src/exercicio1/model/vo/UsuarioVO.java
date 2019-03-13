@@ -56,4 +56,9 @@ public class UsuarioVO {
 	public void setNivel(int nivel) {
 		this.nivel = nivel;
 	}
+	
+	@Override
+	public String toString() {
+		return "Nome: " + getNome() + "\nEmail: " + getEmail() + "\nSenha: " + getSenha() + "\nNível: " + getNivel();
+	}	
 }
