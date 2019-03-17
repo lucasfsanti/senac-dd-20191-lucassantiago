@@ -17,6 +17,10 @@ public class UsuarioVO {
 		this.nivel = nivel;
 	}
 
+	public UsuarioVO() {
+		super();
+	}
+
 	public int getId() {
 		return id;
 	}
