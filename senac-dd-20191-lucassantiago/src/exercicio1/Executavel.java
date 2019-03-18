@@ -1,4 +1,4 @@
-package executavel;
+package exercicio1;
 
 import exercicio1.view.Menu;
 
