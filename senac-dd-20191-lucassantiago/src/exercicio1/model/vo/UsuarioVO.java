@@ -6,9 +6,9 @@ public class UsuarioVO {
 	private String nome;
 	private String email;
 	private String senha;
-	private int nivel;
+	private NivelVO nivel;
 	
-	public UsuarioVO(int id, String nome, String email, String senha, int nivel) {
+	public UsuarioVO(int id, String nome, String email, String senha, NivelVO nivel) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -53,11 +53,11 @@ public class UsuarioVO {
 		this.senha = senha;
 	}
 	
-	public int getNivel() {
+	public NivelVO getNivel() {
 		return nivel;
 	}
 	
-	public void setNivel(int nivel) {
+	public void setNivel(NivelVO nivel) {
 		this.nivel = nivel;
 	}
 	
