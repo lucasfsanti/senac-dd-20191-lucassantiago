@@ -1,11 +1,7 @@
 package exercicio1.view;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
-
-import exercicio1.controller.UsuarioController;
-import exercicio1.model.vo.UsuarioVO;
 
 public class Menu {
 	
@@ -38,8 +34,7 @@ public class Menu {
 	private void encaminharParaMenu(int opcao) {
 		switch(opcao) {
 		case OPCAO_MENU_CADASTRAR: {
-			MenuCadastrar menuCadastrar = new MenuCadastrar();
-			menuCadastrar.apresentarMenuCadastrar();
+			CadastroUsuarioGUI menuUsuario = new CadastroUsuarioGUI();
 			break;
 		}
 		case OPCAO_MENU_EXCLUIR: {
