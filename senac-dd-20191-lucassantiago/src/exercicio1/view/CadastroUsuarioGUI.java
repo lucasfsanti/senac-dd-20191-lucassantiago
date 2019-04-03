@@ -34,7 +34,7 @@ public class CadastroUsuarioGUI {
 	private JComboBox cbNivel;
 	private JPasswordField pfSenha;
 	private JPasswordField pfConfirmacaoSenha;
-	private List<NivelVO> niveis;
+	private ArrayList<NivelVO> niveis;
 
 	/**
 	 * Launch the application.
@@ -150,8 +150,8 @@ public class CadastroUsuarioGUI {
 	}
 
 	private void consultarNiveis() {
-		NivelBO niveis = new NivelBO();
-		niveis.listarNiveis();
+		NivelBO bo = new NivelBO();
+		niveis = bo.listarNiveis();
 		
 	}
 }

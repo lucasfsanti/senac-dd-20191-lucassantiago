@@ -10,11 +10,11 @@ import exercicio1.model.vo.NivelVO;
 
 public class NivelDAO {
 	
-	public ArrayList<Object> listarNivelVO() {
+	public ArrayList<NivelVO> listarNivelVO() {
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
-		ArrayList<Object> listaNiveis = new ArrayList<Object>();
+		ArrayList<NivelVO> listaNiveis = new ArrayList<NivelVO>();
 		String query = "SELECT IDNIVEL, DESCRICAO FROM NIVEL";
 		try {
 			resultado = stmt.executeQuery(query);
@@ -25,7 +25,7 @@ public class NivelDAO {
 				listaNiveis.add(nivel);
 			}
 		} catch (SQLException e) {
-			listaNiveis.add("Erro ao executar query de consulta de níveis!");
+			//listaNiveis.add("Erro ao executar query de consulta de níveis!");
 			e.printStackTrace();
 		} finally {
 			Banco.closeResultSet(resultado);

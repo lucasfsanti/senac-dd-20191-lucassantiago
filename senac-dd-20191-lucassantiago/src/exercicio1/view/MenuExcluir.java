@@ -12,12 +12,15 @@ public class MenuExcluir {
 		
 		usuarioVO.setId(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do usuário a ser excluído: ")));
 		
+		String emailAdmin = JOptionPane.showInputDialog(null, "Digite seu email: ");
+		String senhaAdmin = JOptionPane.showInputDialog(null, "Digite sua senha: ");
+		
 		int opcao = JOptionPane.showConfirmDialog(null, "Confirma a Exclusão do usuário de ID " + usuarioVO.getId() + "?");
 		
 		switch(opcao) {
 		case JOptionPane.YES_OPTION:
 			UsuarioController usuarioController = new UsuarioController();
-			usuarioController.excluirUsuarioController(usuarioVO);
+			usuarioController.excluirUsuarioController(usuarioVO, emailAdmin, senhaAdmin);
 			break;
 		case JOptionPane.NO_OPTION:
 			apresentarMenuExcluir();
