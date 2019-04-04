@@ -3,6 +3,7 @@ package exercicio1.model.bo;
 import java.util.ArrayList;
 
 import exercicio1.model.dao.UsuarioDAO;
+import exercicio1.model.vo.NivelVO;
 import exercicio1.model.vo.UsuarioVO;
 
 public class UsuarioBO {
@@ -63,6 +64,16 @@ public class UsuarioBO {
 	public ArrayList<UsuarioVO> consultarTodosUsuariosBO() {
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		return usuarioDAO.listarUsuarioDAO();
+	}
+
+	public ArrayList<UsuarioVO> listarPorNome(String nome) {
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		return usuarioDAO.listarPorNome(nome);
+	}
+
+	public ArrayList<UsuarioVO> listarPorNivel(NivelVO nivel) {
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		return usuarioDAO.listarPorNivel(nivel);
 	}
 
 }

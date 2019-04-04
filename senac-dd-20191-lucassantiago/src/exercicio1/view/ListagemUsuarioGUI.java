@@ -101,7 +101,10 @@ public class ListagemUsuarioGUI {
 		JButton btnConsultarPorNivel = new JButton("Consultar por nível");
 		btnConsultarPorNivel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				UsuarioController controller = new UsuarioController();
+				ArrayList<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
+				NivelVO nivel = (NivelVO) cbNivel.getModel().getSelectedItem();
+				usuarios = controller.consultarPorNivel(nivel);
 			}
 		});
 		btnConsultarPorNivel.setBounds(390, 49, 160, 30);
@@ -110,7 +113,6 @@ public class ListagemUsuarioGUI {
 		JButton btnConsultarPorNome = new JButton("Consultar por nome");
 		btnConsultarPorNome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO Chamar o método do controller: consultarPorNome(String nome)
 				UsuarioController controller = new UsuarioController();
 				ArrayList<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
 				usuarios = controller.consultarPorNome(txtNome.getText());

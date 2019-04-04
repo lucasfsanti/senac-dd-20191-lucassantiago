@@ -33,7 +33,7 @@ public class NivelVO {
 	
 	@Override
 	public String toString() {
-		return descricao;
+		return idNivel + " " + descricao;
 	}
 
 }

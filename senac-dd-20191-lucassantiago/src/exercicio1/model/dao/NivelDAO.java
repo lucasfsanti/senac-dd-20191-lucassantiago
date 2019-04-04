@@ -25,7 +25,6 @@ public class NivelDAO {
 				listaNiveis.add(nivel);
 			}
 		} catch (SQLException e) {
-			//listaNiveis.add("Erro ao executar query de consulta de níveis!");
 			e.printStackTrace();
 		} finally {
 			Banco.closeResultSet(resultado);

@@ -62,5 +62,25 @@ public class UsuarioController {
 		UsuarioBO usuarioBO = new UsuarioBO();
 		return usuarioBO.consultarTodosUsuariosBO();
 	}
+
+	public ArrayList<UsuarioVO> consultarPorNome(String nome) {
+		if(nome == null || nome.length() == 0) {
+			System.out.println("Digite um nome!");
+			return null;
+		} else {
+			UsuarioBO usuarioBO = new UsuarioBO();
+			return usuarioBO.listarPorNome(nome);
+		}
+	}
+
+	public ArrayList<UsuarioVO> consultarPorNivel(NivelVO nivel) {
+		if(nivel == null ) {
+			System.out.println("Selecione um nível!");
+			return null;
+		} else {
+			UsuarioBO usuarioBO = new UsuarioBO();
+			return usuarioBO.listarPorNivel(nivel);
+		}
+	}
 	
 }

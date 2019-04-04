@@ -78,7 +78,6 @@ public class UsuarioDAO {
 				listaUsuarios.add(usuarioVO);
 			}
 		} catch (SQLException e) {
-			//listaUsuarios.add("Erro ao executar a query de consulta de usuários!\n");
 			e.printStackTrace();
 		} finally {
 			Banco.closeResultSet(resultado);
@@ -130,6 +129,42 @@ public class UsuarioDAO {
 			Banco.closeConnection(conn);
 		}
 		return mensagem;
+	}
+
+	public ArrayList<UsuarioVO> listarPorNome(String nome) {
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+		ArrayList<UsuarioVO> listaUsuarios = new ArrayList<UsuarioVO>();
+		String query = "SELECT USUARIO.IDUSUARIO, USUARIO.NOME, USUARIO.EMAIL, USUARIO.SENHA, NIVEL.IDNIVEL, NIVEL.DESCRICAO "
+				+ "FROM USUARIO LEFT JOIN NIVEL ON USUARIO.IDNIVEL = NIVEL.IDNIVEL WHERE USUARIO.NOME LIKE '%" + nome + "%'";
+		ResultSet resultado = null;
+		try {
+			resultado = stmt.executeQuery(query);
+			while(resultado.next()) {
+				UsuarioVO usuarioVO = new UsuarioVO();
+				usuarioVO.setId(Integer.parseInt(resultado.getString(1)));
+				usuarioVO.setNome(resultado.getString(2));
+				usuarioVO.setEmail(resultado.getString(3));
+				usuarioVO.setSenha(resultado.getString(4));
+				NivelVO nivel = new NivelVO();
+				nivel.setIdNivel(Integer.parseInt(resultado.getString(5)));
+				nivel.setDescricao(resultado.getString(6));
+				usuarioVO.setNivel(nivel);
+				listaUsuarios.add(usuarioVO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Banco.closeResultSet(resultado);
+			Banco.closeStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		return listaUsuarios;
+	}
+
+	public ArrayList<UsuarioVO> listarPorNivel(NivelVO nivel) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
