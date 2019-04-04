@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
@@ -11,6 +12,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
+import exercicio1.controller.UsuarioController;
 import exercicio1.model.bo.NivelBO;
 import exercicio1.model.vo.NivelVO;
 
@@ -21,9 +23,9 @@ import java.awt.event.ActionEvent;
 
 /**
  * 
- * Tela de cadastro de usuÃ¡rios (item 1a da Atividade 4)
+ * Tela de cadastro de usuários (item 1a da Atividade 4)
  * 
- * @author Vilmar CÃ©sar Pereira JÃºnior
+ * @author Vilmar César Pereira Júnior
  *
  */
 public class CadastroUsuarioGUI {
@@ -84,12 +86,12 @@ public class CadastroUsuarioGUI {
 		lblSenha.setBounds(20, 90, 55, 15);
 		frmCadastroDeUsuarios.getContentPane().add(lblSenha);
 		
-		JLabel lblConfirmaoDeSenha = new JLabel("ConfirmaÃ§Ã£o:");
+		JLabel lblConfirmaoDeSenha = new JLabel("Confirmação:");
 		lblConfirmaoDeSenha.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblConfirmaoDeSenha.setBounds(165, 90, 94, 16);
 		frmCadastroDeUsuarios.getContentPane().add(lblConfirmaoDeSenha);
 		
-		JLabel lblNivel = new JLabel("NÃ­vel:");
+		JLabel lblNivel = new JLabel("Nível:");
 		lblNivel.setBounds(20, 125, 55, 15);
 		frmCadastroDeUsuarios.getContentPane().add(lblNivel);
 		
@@ -143,6 +145,13 @@ public class CadastroUsuarioGUI {
 				//2 - Chamar o mÃ©todo salvar(...) de UsuarioController, passando os valores digitados
 				
 				//3 - Mostrar a mensagem devolvida por UsuarioController na tela, por exemplo com JOptionPane
+
+				String senha = new String(pfSenha.getPassword());
+				String confirmacaoSenha = new String(pfConfirmacaoSenha.getPassword());
+				NivelVO nivel = (NivelVO) cbNivel.getModel().getSelectedItem();
+				
+				UsuarioController controller = new UsuarioController();
+				JOptionPane.showMessageDialog(null, controller.cadastrarUsuarioController(txtNome.getText(), txtEmail.getText(), senha, confirmacaoSenha, nivel));
 			}
 		});
 		button.setBounds(20, 155, 160, 35);

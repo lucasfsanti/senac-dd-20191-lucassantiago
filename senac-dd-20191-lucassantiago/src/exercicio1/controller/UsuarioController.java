@@ -19,11 +19,11 @@ public class UsuarioController {
 		if(senha == null || senha.trim().length() == 0) {
 			mensagem += "Digite uma senha.\n";
 		}
-		if(confirmacaoSenha == null || confirmacaoSenha.trim().length() == 0 || confirmacaoSenha.equals(senha)) {
+		if(confirmacaoSenha == null || confirmacaoSenha.trim().length() == 0 || !confirmacaoSenha.equals(senha)) {
 			mensagem += "Confirme sua senha!\n";
 		}
 		if(nivel == null) {
-			mensagem += "Selecione o n√≠vel.\n";
+			mensagem += "Selecione o nÌvel.\n";
 		}
 		if(mensagem.equals("")) {
 			UsuarioVO usuarioVO = new UsuarioVO();
@@ -40,7 +40,7 @@ public class UsuarioController {
 	public String excluirUsuarioController(UsuarioVO usuarioVO, String emailAdmin, String senhaAdmin) {
 		String mensagem = "";
 		if(usuarioVO == null) {
-			mensagem += "Selecione um usu√°rio!\n";
+			mensagem += "Selecione um usu·rio!\n";
 		}
 		if(emailAdmin == null || emailAdmin.length() == 0) {
 			mensagem += "Digite seu email!\n";
@@ -58,7 +58,7 @@ public class UsuarioController {
 		return mensagem;
 	}
 
-	public ArrayList<Object> consultarTodosUsuariosController() {
+	public ArrayList<UsuarioVO> consultarTodosUsuariosController() {
 		UsuarioBO usuarioBO = new UsuarioBO();
 		return usuarioBO.consultarTodosUsuariosBO();
 	}

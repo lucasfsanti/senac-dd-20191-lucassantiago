@@ -38,13 +38,11 @@ public class Menu {
 			break;
 		}
 		case OPCAO_MENU_EXCLUIR: {
-			MenuExcluir menuExcluir = new MenuExcluir();
-			menuExcluir.apresentarMenuExcluir();
+			ExcluirUsuarioGUI menuExcluir = new ExcluirUsuarioGUI();
 			break;
 		}
 		case OPCAO_MENU_LISTAR: {
-			MenuListar menuListar = new MenuListar();
-			menuListar.apresentarMenuListar();
+			ListagemUsuarioGUI menuListagem = new ListagemUsuarioGUI();
 			break;
 		}
 		case OPCAO_MENU_SAIR: {

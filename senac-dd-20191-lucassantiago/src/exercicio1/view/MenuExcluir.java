@@ -10,12 +10,12 @@ public class MenuExcluir {
 	public void apresentarMenuExcluir() {
 		UsuarioVO usuarioVO = new UsuarioVO();
 		
-		usuarioVO.setId(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do usu√°rio a ser exclu√≠do: ")));
+		usuarioVO.setId(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o ID do usu·rio a ser excluÌdo: ")));
 		
 		String emailAdmin = JOptionPane.showInputDialog(null, "Digite seu email: ");
 		String senhaAdmin = JOptionPane.showInputDialog(null, "Digite sua senha: ");
 		
-		int opcao = JOptionPane.showConfirmDialog(null, "Confirma a Exclus√£o do usu√°rio de ID " + usuarioVO.getId() + "?");
+		int opcao = JOptionPane.showConfirmDialog(null, "Confirma a Exclus„o do usu·rio de ID " + usuarioVO.getId() + "?");
 		
 		switch(opcao) {
 		case JOptionPane.YES_OPTION:

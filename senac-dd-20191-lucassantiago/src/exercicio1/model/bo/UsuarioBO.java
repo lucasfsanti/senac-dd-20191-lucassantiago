@@ -16,7 +16,7 @@ public class UsuarioBO {
 	public boolean validarEmail(String email) {
 		String[] emailDividido = email.split("@");
 		if(emailDividido.length == 2) {
-			if(emailDividido[1].length() > 0 && emailDividido[2].length() > 0) {
+			if(emailDividido[0].length() > 0 && emailDividido[1].length() > 0) {
 				return true;
 			} else return false;
 		} else return false;
@@ -60,7 +60,7 @@ public class UsuarioBO {
 		return mensagem;
 	}
 
-	public ArrayList<Object> consultarTodosUsuariosBO() {
+	public ArrayList<UsuarioVO> consultarTodosUsuariosBO() {
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		return usuarioDAO.listarUsuarioDAO();
 	}

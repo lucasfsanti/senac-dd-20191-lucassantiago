@@ -17,7 +17,7 @@ public class UsuarioDAO {
 		int resultado = 0;
 		String mensagem = "";
 		String query = "INSERT INTO USUARIO(NOME, EMAIL, SENHA, IDNIVEL) VALUES ('" + 
-		usuarioVO.getNome() + "', '" + usuarioVO.getEmail() + ", '" + 
+		usuarioVO.getNome() + "', '" + usuarioVO.getEmail() + "', '" + 
 		usuarioVO.getSenha() + "', " + usuarioVO.getNivel().getIdNivel() + ")";
 		try {
 			resultado = stmt.executeUpdate(query);
@@ -28,9 +28,9 @@ public class UsuarioDAO {
 			Banco.closeConnection(conn);
 		}
 		if(resultado >=1) {
-			mensagem += "Usu√°rio cadastro efetuado com sucesso!\n";
+			mensagem += "Usu·rio cadastro efetuado com sucesso!\n";
 		} else {
-			mensagem += "Erro ao executar query que cadastra usu√°rio!\n";
+			mensagem += "Erro ao executar query que cadastra usu·rio!\n";
 		}
 		return mensagem;
 	}
@@ -50,17 +50,17 @@ public class UsuarioDAO {
 			Banco.closeConnection(conn);
 		}
 		if(resultado >= 1) {
-			mensagem += "Exclus√£o efetuada com sucesso!\n";
+			mensagem += "Exclus„o efetuada com sucesso!\n";
 		} else {
-			mensagem += "Erro ao executar a query de exclus√£o de usu√°rio!\n";
+			mensagem += "Erro ao executar a query de exclus„o de usu·rio!\n";
 		}
 		return mensagem;
 	}
 	
-	public ArrayList<Object> listarUsuarioDAO() {
+	public ArrayList<UsuarioVO> listarUsuarioDAO() {
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
-		ArrayList<Object> listaUsuarios = new ArrayList<Object>();
+		ArrayList<UsuarioVO> listaUsuarios = new ArrayList<UsuarioVO>();
 		String query = "SELECT USUARIO.IDUSUARIO, USUARIO.NOME, USUARIO.EMAIL, USUARIO.SENHA, NIVEL.IDNIVEL, NIVEL.DESCRICAO FROM USUARIO LEFT JOIN NIVEL ON USUARIO.IDNIVEL = NIVEL.IDNIVEL";
 		ResultSet resultado = null;
 		try {
@@ -78,7 +78,7 @@ public class UsuarioDAO {
 				listaUsuarios.add(usuarioVO);
 			}
 		} catch (SQLException e) {
-			listaUsuarios.add("Erro ao executar a query de consulta de usu√°rios!\n");
+			//listaUsuarios.add("Erro ao executar a query de consulta de usu·rios!\n");
 			e.printStackTrace();
 		} finally {
 			Banco.closeResultSet(resultado);
@@ -97,10 +97,10 @@ public class UsuarioDAO {
 		try {
 			resultado = stmt.executeQuery(query);
 			if(resultado.next() == false) {
-				mensagem += "Usu√°rio e/ou senha inv√°lidos. Tente novamente.\n";
+				mensagem += "Usu·rio e/ou senha inv·lidos. Tente novamente.\n";
 			}
 		} catch (SQLException e) {
-			mensagem += "Erro ao executar a query que verifica se usu√°rio e senha est√£o corretos!\n";
+			mensagem += "Erro ao executar a query que verifica se usu·rio e senha est„o corretos!\n";
 			e.printStackTrace();
 		} finally {
 			Banco.closeResultSet(resultado);
@@ -119,10 +119,10 @@ public class UsuarioDAO {
 		try {
 			resultado = stmt.executeQuery(query);
 			if(!resultado.getString(1).equals("Administrador")) {
-				mensagem += "Usu√°rio n√£o tem permiss√£o para excluir cadastros.\n";
+				mensagem += "Usu·rio n„o tem permiss„o para excluir cadastros.\n";
 			}
 		} catch (SQLException e) {
-			mensagem += "Erro ao executar a query que verifica se usu√°rio √© administrador!\n";
+			mensagem += "Erro ao executar a query que verifica se usu·rio È administrador!\n";
 			e.printStackTrace();
 		} finally {
 			Banco.closeResultSet(resultado);

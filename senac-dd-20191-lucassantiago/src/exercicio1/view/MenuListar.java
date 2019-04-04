@@ -11,7 +11,7 @@ public class MenuListar {
 
 	public void apresentarMenuListar() {
 		UsuarioController usuarioController = new UsuarioController();
-		ArrayList<Object> listaUsuarioVO = usuarioController.consultarTodosUsuariosController();
+		ArrayList<UsuarioVO> listaUsuarioVO = usuarioController.consultarTodosUsuariosController();
 
 		//UsuarioVO usuarioVO1 = new UsuarioVO(0, "Daiane", "daiane@hotmail.com", "123456", 1);
 		//UsuarioVO usuarioVO2 = new UsuarioVO(1, "Lucas", "lucas@gmail.com", "000000", 2);
