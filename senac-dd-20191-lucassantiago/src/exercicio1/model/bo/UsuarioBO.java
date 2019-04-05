@@ -32,16 +32,16 @@ public class UsuarioBO {
 	public String cadastrarUsuarioBO(UsuarioVO usuarioVO) {
 		String mensagem = "";
 		if(validarNome(usuarioVO.getNome()) == false) {
-			mensagem += "Nome inv√°lido. O nome precisa ter 3 ou mais caracteres!\n";
+			mensagem += "Nome inv·lido. O nome precisa ter 3 ou mais caracteres!\n";
 		}
 		if(validarEmail(usuarioVO.getEmail()) == false) {
-			mensagem += "Email inv√°lido. Digite novamente!\n";
+			mensagem += "Email inv·lido. Digite novamente!\n";
 		}
 		if(validarSenha(usuarioVO.getSenha()) == false) {
-			mensagem += "Senha inv√°lida. A senha precisa ter pelo menos 6 caracteres!\n";
+			mensagem += "Senha inv·lida. A senha precisa ter pelo menos 6 caracteres!\n";
 		}
 		if(usuarioVO.getNivel() == null) {
-			mensagem += "Selecione o n√≠vel!\n";
+			mensagem += "Selecione o nÌvel!\n";
 		}
 		if(mensagem == "") {
 			UsuarioDAO usuarioDAO = new UsuarioDAO();

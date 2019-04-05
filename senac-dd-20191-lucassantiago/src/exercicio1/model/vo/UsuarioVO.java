@@ -63,6 +63,6 @@ public class UsuarioVO {
 	
 	@Override
 	public String toString() {
-		return "Nome: " + getNome() + "\nEmail: " + getEmail() + "\nSenha: " + getSenha() + "\nNível: " + getNivel();
+		return getNome() + " - " + getEmail() + " - " + getNivel().getDescricao();
 	}	
 }

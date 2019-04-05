@@ -34,15 +34,18 @@ public class Menu {
 	private void encaminharParaMenu(int opcao) {
 		switch(opcao) {
 		case OPCAO_MENU_CADASTRAR: {
-			CadastroUsuarioGUI menuUsuario = new CadastroUsuarioGUI();
+			MenuCadastrar menuCadastrar = new MenuCadastrar();
+			menuCadastrar.apresentarMenuCadastrar();
 			break;
 		}
 		case OPCAO_MENU_EXCLUIR: {
-			ExcluirUsuarioGUI menuExcluir = new ExcluirUsuarioGUI();
+			MenuExcluir menuExcluir = new MenuExcluir();
+			menuExcluir.apresentarMenuExcluir();
 			break;
 		}
 		case OPCAO_MENU_LISTAR: {
-			ListagemUsuarioGUI menuListagem = new ListagemUsuarioGUI();
+			MenuListar menuListar = new MenuListar();
+			menuListar.apresentarMenuListar();
 			break;
 		}
 		case OPCAO_MENU_SAIR: {

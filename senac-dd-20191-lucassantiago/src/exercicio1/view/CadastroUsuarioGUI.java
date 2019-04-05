@@ -69,8 +69,8 @@ public class CadastroUsuarioGUI {
 		consultarNiveis();
 		
 		frmCadastroDeUsuarios = new JFrame();
-		frmCadastroDeUsuarios.setTitle("Cadastro de usu√°rios");
-		frmCadastroDeUsuarios.setBounds(100, 100, 370, 220);
+		frmCadastroDeUsuarios.setTitle("Cadastro de usu·rios");
+		frmCadastroDeUsuarios.setBounds(100, 100, 386, 250);
 		frmCadastroDeUsuarios.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmCadastroDeUsuarios.getContentPane().setLayout(null);
 		

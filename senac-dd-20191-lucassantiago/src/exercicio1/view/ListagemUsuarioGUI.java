@@ -102,9 +102,11 @@ public class ListagemUsuarioGUI {
 		btnConsultarPorNivel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsuarioController controller = new UsuarioController();
-				ArrayList<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
 				NivelVO nivel = (NivelVO) cbNivel.getModel().getSelectedItem();
+				ArrayList<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
 				usuarios = controller.consultarPorNivel(nivel);
+				limparTabelaUsuarios();
+				atualizarTabelaUsuarios(usuarios);
 			}
 		});
 		btnConsultarPorNivel.setBounds(390, 49, 160, 30);
@@ -116,7 +118,7 @@ public class ListagemUsuarioGUI {
 				UsuarioController controller = new UsuarioController();
 				ArrayList<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
 				usuarios = controller.consultarPorNome(txtNome.getText());
-				//Chamar sempre que for atualizar a tabela com os usuários
+				limparTabelaUsuarios();
 				atualizarTabelaUsuarios(usuarios);
 			}
 		});
@@ -126,10 +128,26 @@ public class ListagemUsuarioGUI {
 		JButton btnConsultarTodos = new JButton("Consultar todos");
 		btnConsultarTodos.setBounds(70, 85, 240, 30);
 		frmCadastroDeUsuarios.getContentPane().add(btnConsultarTodos);
+		btnConsultarTodos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UsuarioController controller = new UsuarioController();
+				ArrayList<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
+				usuarios = controller.consultarTodosUsuariosController();
+				limparTabelaUsuarios();
+				atualizarTabelaUsuarios(usuarios);
+			}
+		});
 
 		JButton btnLimpar = new JButton("Limpar");
 		btnLimpar.setBounds(310, 85, 240, 30);
 		frmCadastroDeUsuarios.getContentPane().add(btnLimpar);
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtNome.setText("");
+				cbNivel.setSelectedIndex(-1);
+				limparTabelaUsuarios();
+			}
+		});
 
 		//Novo componente: tabela
 		tblUsuarios = new JTable();
@@ -153,6 +171,11 @@ public class ListagemUsuarioGUI {
 	 * Atualiza o JTable de usuários.
 	 * @param usuarios
 	 */
+	protected void limparTabelaUsuarios() {
+		DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
+		model.setRowCount(0);
+	}
+	
 	protected void atualizarTabelaUsuarios(ArrayList<UsuarioVO> usuarios) {
 		DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
 		
