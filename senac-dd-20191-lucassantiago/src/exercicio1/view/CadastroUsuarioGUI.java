@@ -139,12 +139,6 @@ public class CadastroUsuarioGUI {
 		JButton button = new JButton("Salvar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO
-				//1 - Ler os valores digitados nos campos da tela
-				
-				//2 - Chamar o método salvar(...) de UsuarioController, passando os valores digitados
-				
-				//3 - Mostrar a mensagem devolvida por UsuarioController na tela, por exemplo com JOptionPane
 
 				String senha = new String(pfSenha.getPassword());
 				String confirmacaoSenha = new String(pfConfirmacaoSenha.getPassword());

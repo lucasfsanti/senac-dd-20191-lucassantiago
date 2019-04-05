@@ -66,7 +66,6 @@ public class ListagemUsuarioGUI {
 	 */
 	private void initialize() {
 
-		//TODO consultar os níveis no banco (criei na mão aqui :D)
 		consultarNiveis(); //TODO alterar esta chamada AQUI
 
 		frmCadastroDeUsuarios = new JFrame();
@@ -88,11 +87,9 @@ public class ListagemUsuarioGUI {
 		frmCadastroDeUsuarios.getContentPane().add(txtNome);
 		txtNome.setColumns(10);
 
-		//Novo componente: Combobox
 		cbNivel = new JComboBox();
 		cbNivel.setModel(new DefaultComboBoxModel(niveis.toArray()));
 
-		//Inicia sem nada selecionado no combo
 		cbNivel.setSelectedIndex(-1);
 
 		cbNivel.setBounds(70, 50, 320, 28);
@@ -149,11 +146,9 @@ public class ListagemUsuarioGUI {
 			}
 		});
 
-		//Novo componente: tabela
 		tblUsuarios = new JTable();
 		tblUsuarios.setVisible(true);
 
-		//Cria a tabela vazia apenas com as colunas
 		tblUsuarios.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"id", "Nome"},
@@ -167,10 +162,6 @@ public class ListagemUsuarioGUI {
 		frmCadastroDeUsuarios.getContentPane().add(tblUsuarios);
 	}
 
-	/**
-	 * Atualiza o JTable de usuários.
-	 * @param usuarios
-	 */
 	protected void limparTabelaUsuarios() {
 		DefaultTableModel model = (DefaultTableModel) tblUsuarios.getModel();
 		model.setRowCount(0);
