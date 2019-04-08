@@ -146,6 +146,7 @@ public class CadastroUsuarioGUI {
 				
 				UsuarioController controller = new UsuarioController();
 				JOptionPane.showMessageDialog(null, controller.cadastrarUsuarioController(txtNome.getText(), txtEmail.getText(), senha, confirmacaoSenha, nivel));
+				consultarNiveis();
 			}
 		});
 		button.setBounds(20, 155, 160, 35);
@@ -155,6 +156,8 @@ public class CadastroUsuarioGUI {
 	private void consultarNiveis() {
 		NivelBO bo = new NivelBO();
 		niveis = bo.listarNiveis();
+		cbNivel.setModel(new DefaultComboBoxModel(niveis.toArray()));
+		cbNivel.setSelectedIndex(-1);
 		
 	}
 }

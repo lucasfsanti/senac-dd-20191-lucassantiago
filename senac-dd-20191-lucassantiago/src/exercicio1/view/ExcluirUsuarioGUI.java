@@ -24,6 +24,7 @@ public class ExcluirUsuarioGUI {
 	private JTextField txtEmail;
 	private JPasswordField pfSenha;
 	private ArrayList<UsuarioVO> usuarios;
+	private JComboBox cbUsuarios;
 
 	/**
 	 * Launch the application.
@@ -82,7 +83,7 @@ public class ExcluirUsuarioGUI {
 		lblUsuario.setBounds(20, 76, 56, 15);
 		frmExcluirUsuario.getContentPane().add(lblUsuario);
 		
-		JComboBox cbUsuarios = new JComboBox();
+		cbUsuarios = new JComboBox();
 		
 		cbUsuarios.setBounds(76, 76, 299, 22);
 		frmExcluirUsuario.getContentPane().add(cbUsuarios);
@@ -98,6 +99,7 @@ public class ExcluirUsuarioGUI {
 				
 				UsuarioController controller = new UsuarioController();
 				JOptionPane.showMessageDialog(frmExcluirUsuario, controller.excluirUsuarioController(usuarioVO, email, senha));
+				consultarUsuarios();
 			}
 		});
 		btnExcluir.setBounds(20, 117, 160, 35);
@@ -118,5 +120,7 @@ public class ExcluirUsuarioGUI {
 	private void consultarUsuarios() {
 		UsuarioController controller = new UsuarioController();
 		usuarios = controller.consultarTodosUsuariosController();
+		cbUsuarios.setModel(new DefaultComboBoxModel(usuarios.toArray()));
+		cbUsuarios.setSelectedIndex(-1);
 	}
 }
