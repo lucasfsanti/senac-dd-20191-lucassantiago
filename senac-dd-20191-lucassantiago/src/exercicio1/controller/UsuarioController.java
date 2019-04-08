@@ -10,16 +10,16 @@ public class UsuarioController {
 
 	public String cadastrarUsuarioController(String nome, String email, String senha, String confirmacaoSenha, NivelVO nivel) {
 		String mensagem = "";
-		if(nome == null || nome.trim().length() == 0) {
+		if(nome == null || nome.isEmpty()) {
 			mensagem += "Digite seu nome.\n";
 		}
-		if(email == null || email.trim().length() == 0) {
+		if(email == null || email.isEmpty()) {
 			mensagem += "Digite seu email.\n";
 		}
-		if(senha == null || senha.trim().length() == 0) {
+		if(senha == null || senha.isEmpty()) {
 			mensagem += "Digite uma senha.\n";
 		}
-		if(confirmacaoSenha == null || confirmacaoSenha.trim().length() == 0 || !confirmacaoSenha.equals(senha)) {
+		if(confirmacaoSenha == null || confirmacaoSenha.isEmpty() || !confirmacaoSenha.equals(senha)) {
 			mensagem += "Confirme sua senha!\n";
 		}
 		if(nivel == null) {
@@ -42,10 +42,10 @@ public class UsuarioController {
 		if(usuarioVO == null) {
 			mensagem += "Selecione um usuário!\n";
 		}
-		if(emailAdmin == null || emailAdmin.length() == 0) {
+		if(emailAdmin == null || emailAdmin.isEmpty()) {
 			mensagem += "Digite seu email!\n";
 		}
-		if(senhaAdmin == null || senhaAdmin.length() ==0) {
+		if(senhaAdmin == null || senhaAdmin.isEmpty()) {
 			mensagem += "Digite sua senha!\n";
 		}
 		if(mensagem.equals("")) {
@@ -64,7 +64,7 @@ public class UsuarioController {
 	}
 
 	public ArrayList<UsuarioVO> consultarPorNome(String nome) {
-		if(nome == null || nome.length() == 0) {
+		if(nome == null || nome.isEmpty()) {
 			System.out.println("Digite um nome!");
 			return null;
 		} else {
