@@ -23,7 +23,7 @@ import exercicio1.controller.UsuarioController;
 import exercicio1.model.bo.NivelBO;
 import exercicio1.model.vo.NivelVO;
 
-public class CadastroUsuario extends JFrame {
+public class CadastroUsuarioComGroupLayout extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtNome;
@@ -40,7 +40,7 @@ public class CadastroUsuario extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CadastroUsuario frame = new CadastroUsuario();
+					CadastroUsuarioComGroupLayout frame = new CadastroUsuarioComGroupLayout();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +52,7 @@ public class CadastroUsuario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CadastroUsuario() {
+	public CadastroUsuarioComGroupLayout() {
 
 		setTitle("Cadastro de Usuários");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -1,6 +1,7 @@
-package exercicioConsultaComPaginacao;
+package exercicio05;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.format.DateTimeFormatter;
@@ -21,7 +22,12 @@ import javax.swing.table.DefaultTableModel;
 
 import com.github.lgooddatepicker.components.DatePicker;
 
-public class TelaListagemProdutos extends JFrame {
+import exercicioConsultaComPaginacao.Produto;
+import exercicioConsultaComPaginacao.ProdutoController;
+import exercicioConsultaComPaginacao.ProdutoSeletor;
+import net.miginfocom.swing.MigLayout;
+
+public class ListagemProdutosComMigLayout extends JFrame {
 
 	private static final String COR_AZUL = "Azul";
 	private static final String COR_AMARELO = "Amarelo";
@@ -31,31 +37,28 @@ public class TelaListagemProdutos extends JFrame {
 	private static final int TAMANHO_PAGINA = 5;
 
 	private JPanel contentPane;
+	private JTextField txtNome;
+	private JTextField txtPeso;
 	private JTable tblProdutos;
-	private JButton btnGerarXls;
-	private JButton btnGerarPdf;
-	private JButton btnProximo;
-	private JButton btnAnterior;
 	private JComboBox cbCor;
+	private JButton btnConsultar;
 	private DatePicker dtInicioCadastro;
 	private DatePicker dtFimCadastro;
 	private int paginaAtual = 1;
 	private int paginaFinal = 1;
-
-	// Esta lista de produtos � atualizada a cada nova consulta realizada com os
-	// filtros.
-	// Ser� a lista usada para gerar os relat�rios
-	private List<Produto> produtosConsultados;
-	private JTextField txtNome;
-	private JTextField txtPeso;
+	private JButton btnProximo;
+	private JButton btnAnterior;
 	private JLabel lblPaginaAtual;
-	private JLabel lblPaginaTotal;
+	private List<Produto> produtosConsultados;
 
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaListagemProdutos frame = new TelaListagemProdutos();
+					ListagemProdutosComMigLayout frame = new ListagemProdutosComMigLayout();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -66,107 +69,81 @@ public class TelaListagemProdutos extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * 
-	 * @param cbCor
 	 */
-	public TelaListagemProdutos() {
+	public ListagemProdutosComMigLayout() {
 		setTitle("Consulta de Produtos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 480, 530);
+		setBounds(100, 100, 450, 551);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new MigLayout("", "[grow][160px:160px:160px,grow][][160px:160px:160px]",
+				"[30px:30px:30px][30px:30px:30px][30px:30px:30px][][30px:30px:30px][30px:30px:30px][30px:30px:30px][][grow][][]"));
 
-		JButton btnConsultar = new JButton("Consultar");
+		JLabel lblFiltrosParaPesquisa = new JLabel("Filtros para Pesquisa:");
+		contentPane.add(lblFiltrosParaPesquisa, "cell 1 0");
 
-		btnConsultar.setBounds(160, 215, 150, 40);
-		contentPane.add(btnConsultar);
+		JLabel lblNome = new JLabel("Nome:");
+		contentPane.add(lblNome, "cell 0 1,alignx left");
 
-		String[] cores = { "---Selecione---", TelaListagemProdutos.COR_AZUL, TelaListagemProdutos.COR_AMARELO,
-				TelaListagemProdutos.COR_PRETO, TelaListagemProdutos.COR_VERDE, TelaListagemProdutos.COR_VERMELHO };
+		txtNome = new JTextField();
+		contentPane.add(txtNome, "flowx,cell 1 1,grow");
+		txtNome.setColumns(10);
 
-		JLabel lblFiltroNome = new JLabel("Nome:");
-		lblFiltroNome.setBounds(10, 40, 50, 15);
-		contentPane.add(lblFiltroNome);
+		JLabel lblCor = new JLabel("Cor:");
+		contentPane.add(lblCor, "cell 2 1,alignx trailing");
+
+		cbCor = new JComboBox();
+		cbCor.setModel(new DefaultComboBoxModel(
+				new String[] { "---Selecione---", ListagemProdutosComMigLayout.COR_AZUL, ListagemProdutosComMigLayout.COR_AMARELO,
+						ListagemProdutosComMigLayout.COR_PRETO, ListagemProdutosComMigLayout.COR_VERDE, ListagemProdutosComMigLayout.COR_VERMELHO }));
+		contentPane.add(cbCor, "cell 3 1,grow");
+
+		JLabel lblPeso = new JLabel("Peso:");
+		contentPane.add(lblPeso, "cell 0 2,alignx left");
+
+		txtPeso = new JTextField();
+		contentPane.add(txtPeso, "cell 1 2,grow");
+		txtPeso.setColumns(10);
+
+		JLabel lblPeriodoDeCadastro = new JLabel("Período de Cadastro:");
+		contentPane.add(lblPeriodoDeCadastro, "cell 1 4");
+
+		JLabel lblDe = new JLabel("De:");
+		contentPane.add(lblDe, "cell 0 5");
+
+		JLabel lblAte = new JLabel("Até");
+		contentPane.add(lblAte, "cell 0 6");
+
+		dtInicioCadastro = new DatePicker();
+		dtInicioCadastro.getComponentDateTextField().setFont(new Font("Verdana", Font.PLAIN, 22));
+		dtInicioCadastro.getComponentToggleCalendarButton().setFont(new Font("Verdana", Font.PLAIN, 22));
+		getContentPane().add(dtInicioCadastro, "cell 1 5");
+
+		dtFimCadastro = new DatePicker();
+		dtFimCadastro.getComponentDateTextField().setFont(new Font("Verdana", Font.PLAIN, 22));
+		dtFimCadastro.getComponentToggleCalendarButton().setFont(new Font("Verdana", Font.PLAIN, 22));
+		getContentPane().add(dtFimCadastro, "cell 1 6");
+
+		btnConsultar = new JButton("Consultar");
+		contentPane.add(btnConsultar, "cell 3 6,grow");
+		btnConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				calcularPaginas();
+				consultarProdutos();
+			}
+		});
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 205, 462, 14);
-		contentPane.add(separator);
-
-		JLabel lblFiltrosDeConsulta = new JLabel("Filtros de consulta:");
-		lblFiltrosDeConsulta.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFiltrosDeConsulta.setBounds(10, 11, 448, 14);
-		contentPane.add(lblFiltrosDeConsulta);
+		contentPane.add(separator, "cell 0 7 4 1,grow");
 
 		tblProdutos = new JTable();
 		tblProdutos.setModel(new DefaultTableModel(new String[][] { { "#", "Nome", "Marca", "Peso", "Dt. Cadastro" }, },
 				new String[] { "#", "Nome", "Marca", "Peso", "Dt. Cadastro" }));
-		tblProdutos.setBounds(10, 259, 462, 174);
-		contentPane.add(tblProdutos);
-
-		JLabel lblFiltroCor = new JLabel("Cor:");
-		lblFiltroCor.setBounds(255, 40, 46, 14);
-		contentPane.add(lblFiltroCor);
-
-		cbCor = new JComboBox(cores);
-		cbCor.setModel(new DefaultComboBoxModel(
-				new String[] { "---Selecione---", "Azul", "Amarelo", "Preto", "Verde", "Vermelho" }));
-		cbCor.setBounds(300, 37, 160, 30);
-
-		contentPane.add(cbCor);
-
-		btnGerarXls = new JButton("Gerar XLS");
-		btnGerarXls.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// TODO
-			}
-		});
-		btnGerarXls.setBounds(100, 404, 117, 29);
-		contentPane.add(btnGerarXls);
-
-		btnGerarPdf = new JButton("Gerar PDF");
-		btnGerarPdf.setBounds(248, 404, 117, 29);
-		contentPane.add(btnGerarPdf);
-
-		btnGerarXls.setEnabled(false);
-		btnGerarPdf.setEnabled(false);
-
-		JLabel lblPeriodoCadastro = new JLabel("Per�odo de cadastro");
-		lblPeriodoCadastro.setBounds(10, 110, 170, 20);
-		contentPane.add(lblPeriodoCadastro);
-
-		dtInicioCadastro = new DatePicker();
-		dtInicioCadastro.setBounds(80, 130, 378, 30);
-		contentPane.add(dtInicioCadastro);
-
-		JLabel lblDataInicioCadastro = new JLabel("De:");
-		lblDataInicioCadastro.setBounds(10, 140, 61, 16);
-		contentPane.add(lblDataInicioCadastro);
-
-		JLabel lblDataFimCadastro = new JLabel("At�:");
-		lblDataFimCadastro.setBounds(10, 170, 61, 16);
-		contentPane.add(lblDataFimCadastro);
-
-		dtFimCadastro = new DatePicker();
-		dtFimCadastro.setBounds(80, 170, 378, 30);
-		contentPane.add(dtFimCadastro);
-
-		txtNome = new JTextField();
-		txtNome.setBounds(80, 35, 160, 30);
-		contentPane.add(txtNome);
-		txtNome.setColumns(10);
-
-		JLabel lblPeso = new JLabel("Peso:");
-		lblPeso.setBounds(10, 70, 61, 16);
-		contentPane.add(lblPeso);
-
-		txtPeso = new JTextField();
-		txtPeso.setBounds(80, 67, 160, 30);
-		contentPane.add(txtPeso);
-		txtPeso.setColumns(10);
+		contentPane.add(tblProdutos, "cell 0 8 4 2,grow");
 
 		btnAnterior = new JButton(" < Anterior");
+		btnAnterior.setEnabled(false);
 		btnAnterior.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (paginaAtual > 1) {
@@ -175,11 +152,10 @@ public class TelaListagemProdutos extends JFrame {
 				}
 			}
 		});
-		btnAnterior.setBounds(80, 457, 110, 23);
-		contentPane.add(btnAnterior);
-		btnAnterior.setEnabled(false);
+		contentPane.add(btnAnterior, "flowx,cell 1 10,alignx right");
 
-		btnProximo = new JButton("Pr�ximo >");
+		btnProximo = new JButton("Próximo >");
+		btnProximo.setEnabled(false);
 		btnProximo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (paginaAtual < paginaFinal) {
@@ -188,27 +164,11 @@ public class TelaListagemProdutos extends JFrame {
 				}
 			}
 		});
-		btnProximo.setBounds(258, 457, 107, 23);
-		contentPane.add(btnProximo);
-		btnProximo.setEnabled(false);
+		contentPane.add(btnProximo, "cell 2 10 2 1");
 
-		lblPaginaAtual = new JLabel("");
+		lblPaginaAtual = new JLabel("1 / 1");
 		lblPaginaAtual.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPaginaAtual.setBounds(182, 461, 54, 14);
-		lblPaginaAtual.setText(paginaAtual + " / " + paginaFinal);
-		contentPane.add(lblPaginaAtual);
-
-		/*
-		 * lblPaginaTotal = new JLabel("/ " + paginaFinal);
-		 * lblPaginaTotal.setBounds(219, 458, 46, 20); contentPane.add(lblPaginaTotal);
-		 */
-
-		btnConsultar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				calcularPaginas();
-				consultarProdutos();
-			}
-		});
+		contentPane.add(lblPaginaAtual, "cell 1 10,alignx right");
 	}
 
 	void atualizarBotoes() {
@@ -229,7 +189,6 @@ public class TelaListagemProdutos extends JFrame {
 		ProdutoController controlador = new ProdutoController();
 		ProdutoSeletor seletor = new ProdutoSeletor();
 
-		// Preenche os campos de filtro da tela no seletor
 		if (cbCor.getSelectedIndex() > 0) {
 			seletor.setCorProduto(cbCor.getSelectedItem().toString());
 		}
@@ -267,7 +226,6 @@ public class TelaListagemProdutos extends JFrame {
 
 		seletor.setLimite(TAMANHO_PAGINA);
 
-		// Preenche os campos de filtro da tela no seletor
 		if (cbCor.getSelectedIndex() > 0) {
 			seletor.setCorProduto(cbCor.getSelectedItem().toString());
 		}
@@ -290,23 +248,14 @@ public class TelaListagemProdutos extends JFrame {
 	}
 
 	protected void atualizarTabelaProdutos(List<Produto> produtos) {
-		// atualiza o atributo produtosConsultados
 		produtosConsultados = produtos;
 
-		// TODO descomentar quando chegarmos em relat�rios
-		// btnGerarXls.setEnabled(produtos != null && produtos.size() > 0);
-		// btnGerarPdf.setEnabled(produtos != null && produtos.size() > 0);
-
-		// Limpa a tabela
 		tblProdutos.setModel(new DefaultTableModel(new String[][] { { "#", "Nome", "Marca", "Peso", "Dt. Cadastro" }, },
 				new String[] { "#", "Nome", "Marca", "Peso", "Dt. Cadastro" }));
 
 		DefaultTableModel modelo = (DefaultTableModel) tblProdutos.getModel();
 
 		for (Produto produto : produtos) {
-			// Crio uma nova linha na tabela
-			// Preencher a linha com os atributos do produto
-			// na ORDEM do cabe�alho da tabela
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			String dataFormatada = produto.getDataCadastro().format(formatter);
 
@@ -314,6 +263,6 @@ public class TelaListagemProdutos extends JFrame {
 					produto.getPeso() + "", dataFormatada };
 			modelo.addRow(novaLinha);
 		}
-
 	}
+
 }
